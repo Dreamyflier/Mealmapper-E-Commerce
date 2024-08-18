@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealMapper | Ecommerce Website Design</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{% url 'index' %}"><img src="{% static 'images/logooo.png' %}" alt="logo" width="125px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'list_items' %}">Products</a></li>
+                    <li><a href="{% url 'user_login' %}">Account</a></li>
+                </ul>
+                <form action="{% url 'search_items' %}" method="get" class="d-flex">
+                    {% csrf_token %}
+                    <input name="q" id="q" class="form-control me-2" type="text" placeholder="Search">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </nav>
+            <a href="{% url 'display_cart_items' %}"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
+            <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+        </div>
+
+        <div class="container m-5">
+            {% block login %}
+            <div class="header">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-2">
+                            <h1>make you food tasty </h1>
+                            <p>Food delivery apps are third-party delivery services hosted on mobile applications that restaurants or retailers partner with to showcase their menu and food offerings, allowing customers to order food and get it delivered to their doorstep</p>
+                            <a href="http://127.0.0.1:8000/list-items" class="btn">Explore Now &#8594;</a>
+                        </div>
+                        <div class="col-2">
+                            <img src="static/images/logooo.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Categories -->
+
+            <div class="categories">
+                <div class="small-container">
+                    <div class="row">
+                        <div class="col-3">
+                            <img src="static/images/i1.webp">
+                        </div>
+                        <div class="col-3">
+                            <img src="static/images/i2.jpg">
+                        </div>
+                        <div class="col-3">
+                            <img src="static/images/i3.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Testimonial-->
+            <div class="testimonial">
+                <div class="small-container">
+                    <div class="row">
+                        <!-- <div class="col-3">
+                            <img src="static/images/i1.webp" class="offer-img">
+                        </div> -->
+                        <div class="col-2">
+                            <p>"Fantastic Service and Delicious Food!"
+                                Meal Mapper has completely changed the way I approach meal planning and delivery. The website is incredibly user-friendly, making it a breeze to navigate through various cuisines and dietary preferences. What sets Meal Mapper apart is not just the convenience of delivery but the quality of food they offer. Every meal I've ordered has been fresh, flavorful, and delivered right on time. With a diverse range of restaurants to choose from, Meal Mapper ensures there's something for everyone. I highly recommend Meal Mapper to anyone looking for a hassle-free and satisfying dining experience!</p>
+                            <a href="http://127.0.0.1:8000/list-items" class="btn">Buy Now &#8594;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial -->
+            <div class="testimonial">
+                <div class="small-container">
+                    <div class="row">
+                        <div class="col-3">
+                            <i class="fa fa-quote-left"></i>
+                            "Outstanding Customer Service and Delicious Food!"
+                            Meal Mapper has exceeded my expectations in every aspect. Not only is their website easy to use, but their customer service is also top-notch. I encountered a minor issue with one of my orders, and their support team resolved it swiftly and professionally, ensuring I was completely satisfied. As for the food, it's simply amazing! From the first bite to the last, each dish bursts with flavor and freshness. Whether I'm ordering for myself or hosting a dinner party, Meal Mapper never disappoints. With their extensive restaurant selection and reliable delivery service, Meal Mapper has become an indispensable part of my culinary repertoire. Five stars all the way!</p>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <img src="static/images/user-2.png">
+                            <h3>Mike Smith</h3>
+                        </div>
+                        <div class="col-3">
+                            <i class="fa fa-quote-left"></i>
+                            >"Outstanding Customer Service and Delicious Food!"
+Meal Mapper has exceeded my expectations in every aspect. Not only is their website easy to use, but their customer service is also top-notch. I encountered a minor issue with one of my orders, and their support team resolved it swiftly and professionally, ensuring I was completely satisfied. As for the food, it's simply amazing! From the first bite to the last, each dish bursts with flavor and freshness. Whether I'm ordering for myself or hosting a dinner party, Meal Mapper never disappoints. With their extensive restaurant selection and reliable delivery service, Meal Mapper has become an indispensable part of my culinary repertoire. Five stars all the way!</p>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <img src="static/images/user-3.png">
+                            <h3>Mabel Joe</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- javascript -->
+
+            <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px"
+            }
+            else {
+                MenuItems.style.maxHeight = "0px"
+            }
+        }
+
+
+            </script>
+
+            {% endblock %}
+            {% block list_addresses %}
+            {% endblock %}
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
